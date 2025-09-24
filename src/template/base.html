@@ -2,12 +2,15 @@
 <html>
 <head>
     <title>{% block head_title %} Saas {% endblock head_title %}</title>
-
+        {% include 'base/css.html'  %}
 </head>
-<body>
-
+<body class="bg-green-50">
+    {% include 'nav/navbar.html' %}
+    
     {% block content %}
         replace me
     {% endblock content %}
+
+    {% include 'base/js.html' %}
 </body>
 </html>

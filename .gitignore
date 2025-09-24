@@ -1,3 +1,9 @@
+# ignore vendor files for 
+src/staticfiles/vendors
+# ignore vendor static files
+local-cdn/
+
+
 .DS_Store
 venv/
 # Byte-compiled / optimized / DLL files
