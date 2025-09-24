@@ -43,11 +43,17 @@ COPY ./src /code
 # Install the Python project requirements
 RUN pip install -r /tmp/requirements.txt
 
-ARG DJANGO_SECRET_KEY
-ENV DJANGO_SECRET_KEY = ${DJANGO_SECRET_KEY}
+# Minimal environment so Django settings can load during build-only steps
+# These can be overridden at runtime by your platform env vars
+ARG DJANGO_SECRET_KEY=build-secret
+ARG DJANGO_DEBUG=False
+ARG DJANGO_ALLOWED_HOSTS=*
+ARG DJANGO_DATABASE_URL=sqlite:////code/db.sqlite3
 
-ARG DJANGO_DEBUG=0
-ARG DJANGO_DEBUG=${DJANGO_DEBUG}
+ENV SECRET_KEY=${DJANGO_SECRET_KEY}
+ENV DEBUG=${DJANGO_DEBUG}
+ENV ALLOWED_HOSTS=${DJANGO_ALLOWED_HOSTS}
+ENV DATABASE_URL=${DJANGO_DATABASE_URL}
 # database isn't available during build
 # run any other commands that do not need the database
 # such as:
